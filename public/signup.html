@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="form.css" />
+  </head>
+  <body>
+    <div class="signupFrm">
+      <form onsubmit="saveForm(event)" class="form">
+        <h1 class="title">Sign up</h1>
+        <hr />
+        <div id="msg"></div>
+        <br />
+        <div class="inputContainer">
+          <input
+            type="text"
+            id="userName"
+            class="input"
+            placeholder="a"
+            required
+          />
+          <label for="userName" class="label">Username</label>
+        </div>
+
+        <div class="inputContainer">
+          <input
+            type="text"
+            id="emailID"
+            class="input"
+            placeholder="a"
+            required
+          />
+          <label for="emailID" class="label">Email</label>
+        </div>
+
+        <div class="inputContainer">
+          <input type="text" id="pass" class="input" placeholder="a" required />
+          <label for="pass" class="label">Password</label>
+        </div>
+        <div id="loginlink"></div>
+        <input type="submit" class="submitBtn" value="Sign up" />
+      </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+    <script>
+
+      const msg = document.getElementById("msg");
+
+      //SIGNUP
+      async function saveForm(event) {
+        event.preventDefault();
+        const name = event.target.userName.value;
+        const email = event.target.emailID.value;
+        const password = event.target.pass.value;
+        const userData = {
+          name,
+          email,
+          password,
+        };
+        try {
+          let res = await axios.post("http://localhost:3000/user/signup",userData);
+          if (res.status === 201) {
+            msg.innerHTML =
+              msg.innerHTML + `<div style="color:green;">${res.data}</div>`;
+            setTimeout(() => {
+              msg.innerHTML = "";
+              document.getElementById(
+                "loginlink"
+              ).innerHTML = `<a href="login.html"> Login </a>`;
+            }, 800);
+          }
+        } catch (err) {
+          console.log(err);
+          msg.innerHTML =
+            msg.innerHTML +
+            `<div style="color:red;">${err.response.data}</div>`;
+          setTimeout(() => (msg.innerHTML = ""), 800);
+          console.log("hello");
+        }
+      }
+    </script>
+  </body>
+</html>

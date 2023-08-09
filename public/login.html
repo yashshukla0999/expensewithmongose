@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="form.css">
+</head>
+<body>
+    <div class="signupFrm">
+        <form  class="form" onsubmit="checkDetails(event)">
+          <h1 class="title">Log in</h1><hr>
+         <div id="msg"> </div><br>
+                  
+          <div class="inputContainer">
+            <input type="text" id='emailID' class="input" placeholder="a" required>
+            <label for="emailID" class="label">Email</label>
+          </div>
+    
+          <div class="inputContainer">
+            <input type="password" id='pass' class="input" placeholder="a" required> 
+            <label for="pass" class="label">Password</label>
+            
+          </div>
+          <a style="text-decoration:none;" href="forgot.html">Forgot Password </a>
+          <div><input type="button" onclick="signupform()" style="margin-top:0%;float:left" class="submitBtn" value="Sign up">  
+            <!-- <input type="submit" onclick="signupform()"  class="submitBtn1" value="Sign up"> -->
+            <input type="submit" class="submitBtn" value="Log in"></div>
+        </div> 
+          </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+<script>
+
+        //SCRIPT
+      const msg= document.getElementById('msg');
+
+        //SIGNUP FORM
+     function signupform()
+     {
+        window.location.href="/signup.html";
+     }
+
+        //LOGIN 
+         async function checkDetails(event)
+          {
+               event.preventDefault();
+  
+              const email= event.target.emailID.value;
+              const password= event.target.pass.value;
+              const userData={
+                        email,
+                        password
+                      }
+          try{
+                let res=await axios.post("http://localhost:3000/user/login",userData);
+                localStorage.setItem('token',res.data.token);
+                localStorage.setItem('limit',1);
+                window.location.href="/addexpense.html"
+               }
+         catch(err)
+            {
+                console.log(err);
+                msg.innerHTML=msg.innerHTML+`<div style="color:red;">${err.response.data}</div>`;
+                setTimeout(()=>
+                msg.innerHTML='',800)
+                }
+                  }
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "nodejs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
+    "start-server": "node app.js",
+    "start-dev": "nodemon app.js"
+  },
+  "author": "ASIF ALI",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.18.3"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1404.0",
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongodb": "^5.7.0",
+    "mongoose": "^7.4.1",
+    "morgan": "^1.10.0",
+    "pug": "^2.0.3",
+    "razorpay": "^2.8.6",
+    "sib-api-v3-sdk": "^8.5.0",
+    "uuid": "^9.0.0"
+  },
+  "keywords": []
+}

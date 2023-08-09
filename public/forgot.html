@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <link rel="stylesheet" href="form.css">
+</head>
+
+<body>
+    <div class="signupFrm">
+        <form class="form" onsubmit="forgot(event)">
+            <p style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"> Forgot password,
+                enter your Email below:</p>
+            <div class="inputContainer">
+                <input type="text" id='emailID' class="input" placeholder="a" required>
+                <label for="emailID" class="label">Email</label>
+            </div>
+            <div id="msg"> </div>
+            <input type="submit" class="submitBtn" value="Submit">
+        </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+
+    <script>
+        //FORGOT PASSWORD
+        async function forgot(event) {
+            event.preventDefault();
+            const email = event.target.emailID.value;
+            const obj = {
+                email,
+            }
+            const res = await axios.post("http://localhost:3000/called/password/forgotpassword", obj);
+            document.getElementById('msg').innerHTML = `<h5>${res.data.message}</h5>`;
+            setTimeout(() => {
+                document.getElementById('msg').innerHTML = ' ';
+            }, 1500)
+        }
+    </script>
+</body>
+
+</html>
